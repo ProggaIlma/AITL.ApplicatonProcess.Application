@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="margin: 20px">
+
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" aria-describedby="nameHelp" formControlName="name"
+           [(ngModel)]="employee.Name" name="name" placeholder="Enter name">
+    <div *ngIf="employeeForm.controls['name'].invalid && (employeeForm.controls['name'].dirty || employeeForm.controls['name'].touched)" class="alert">
+        <small *ngIf="employeeForm.controls['name'].errors" class="form-text text-muted">
+          at least 5 Characters</small>
+    </div>
+  </div>
+
+
+  <div class="form-group" >
+    <label for="Familyname">Family Name</label>
+    <input type="text" class="form-control" id="Familyname" aria-describedby="familynameHelp" formControlName="familyName"
+           [(ngModel)]="employee.FamilyName" name="Familyname" placeholder="Enter family name">
+    <div *ngIf="employeeForm.controls['familyName'].invalid && (employeeForm.controls['familyName'].dirty || employeeForm.controls['familyName'].touched)" class="alert">
+      <small *ngIf="employeeForm.controls['familyName'].errors" class="form-text text-muted">
+        at least 5 Characters</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input type="text" class="form-control" id="address" aria-describedby="addressHelp" formControlName="address"
+           [(ngModel)]="employee.Address" name="address" placeholder="Enter address">
+    <div *ngIf="employeeForm.controls['address'].invalid && (employeeForm.controls['address'].dirty || employeeForm.controls['address'].touched)" class="alert">
+      <small *ngIf="employeeForm.controls['address'].errors" class="form-text text-muted">
+        at least 10 Characters</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email"
+           [(ngModel)]="employee.EMailAdress" name="email" placeholder="Enter email">
+    <div *ngIf="employeeForm.controls['email'].invalid && (employeeForm.controls['email'].dirty || employeeForm.controls['email'].touched)" class="alert">
+      <small *ngIf="employeeForm.controls['email'].errors" class="form-text text-muted">
+        Please enter a valid email address</small>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="Age">Age</label>
+    <input type="number" class="form-control" id="Age" aria-describedby="AgeHelp" formControlName="age"
+           [(ngModel)]="employee.Age" name="email" placeholder="Enter Age">
+    <div *ngIf="employeeForm.controls['age'].invalid && (employeeForm.controls['age'].dirty || employeeForm.controls['age'].touched)" class="alert">
+      <small *ngIf="employeeForm.controls['age'].errors" class="form-text text-muted">
+        must be between 20 and 60</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Country of Origin</label>
+    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="employee.CountryOfOrigin" formControlName="country">
+      <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="employee.Hired" formControlName="hired" >
+    <label class="form-check-label" for="exampleCheck1" style="margin: 3px">Hired</label>
+  </div>
+
+  <button type=button class="btn btn-primary" [disabled]="!employeeForm.valid"  (click)="clickMethod('name')" style="margin: 10px">Reset</button>
+
+
+  <button style="margin: 10px" type="submit" [disabled]="!employeeForm.valid || !employee.Age || !employee.Name
+|| !employee.FamilyName || !employee.CountryOfOrigin || !employee.EMailAdress
+" class="btn btn-primary" >Submit</button>
+
+
+
+
+</form>
+
+</body>
+</html>
